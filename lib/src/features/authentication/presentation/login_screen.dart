@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:messagme/src/features/chatpage.dart';
-import 'package:messagme/src/features/singup.dart';
+import 'package:messagme/src/features/authentication/presentation/singup.dart';
+import 'package:messagme/src/features/home/presentation/home_view.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
@@ -31,18 +31,13 @@ class LoginScreen extends StatelessWidget {
                   height: 150,
                   child: Center(
                     child: Image(
-                      image: AssetImage('assets/images/logo.png'),
+                      image: AssetImage('assets/images/logo2.png'),
                     ),
                   ),
-                ),              //name firma
+                ),     
+                SizedBox(height: 30),         
                 Text(
-                  'Call Me Now',
-                  style:TextStyle(color: Colors.white,fontSize: 20
-                ),),
-                SizedBox(height: 10),
-                // Hello again!
-                Text(
-                  'Hello Again!',
+                  'Welcom to Our Community!',
                   style:TextStyle(color: Colors.white,fontSize: 20,
                 ),),
                 SizedBox(height: 10),
@@ -118,7 +113,7 @@ class LoginScreen extends StatelessWidget {
                     onTap: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => ChatPage()),
+                        MaterialPageRoute(builder: (context) => HomeView()),
                       );
                     },
                     child: Container(

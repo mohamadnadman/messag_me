@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class EmailConfirm extends StatelessWidget {
-  const EmailConfirm({super.key});
+class BarbieGame extends StatelessWidget {
+  const BarbieGame({super.key});
 
   @override
   Widget build(BuildContext context) {

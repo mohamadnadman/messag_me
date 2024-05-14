@@ -1,6 +1,6 @@
 
 import 'package:flutter/material.dart';
-import 'package:messagme/src/features/email_confirm.dart';
+import 'package:messagme/src/features/authentication/presentation/email_confirm.dart';
 class SingupScreen extends StatelessWidget {
   const SingupScreen({super.key});
   @override
@@ -12,7 +12,11 @@ class SingupScreen extends StatelessWidget {
         begin: Alignment.topLeft,
         end: Alignment.bottomRight,
         colors: [
-          Color.fromARGB(255, 115, 79, 141),Color.fromARGB(255, 150, 94, 187),Color.fromARGB(255, 90, 47, 73),Color.fromARGB(255, 151, 130, 164),Color(0xff7F5D72),
+          Color.fromARGB(255, 115, 79, 141),
+          Color.fromARGB(255, 150, 94, 187),
+          Color.fromARGB(255, 90, 47, 73)
+          ,Color.fromARGB(255, 151, 130, 164),
+          Color(0xff7F5D72),
         ]
         )
       ),
