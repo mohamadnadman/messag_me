@@ -1,24 +1,99 @@
-
 import 'package:flutter/material.dart';
 import 'package:messagme/src/features/authentication/presentation/email_confirm.dart';
-class SingupScreen extends StatelessWidget {
+
+class SingupScreen extends StatefulWidget {
   const SingupScreen({super.key});
+
+  @override
+  _SingupScreenState createState() => _SingupScreenState();
+}
+
+class _SingupScreenState extends State<SingupScreen> {
+  final _formKey = GlobalKey<FormState>();
+  final _fullNameController = TextEditingController();
+  final _emailController = TextEditingController();
+  final _phoneController = TextEditingController();
+  final _passwordController = TextEditingController();
+  final _confirmPasswordController = TextEditingController();
+
+  @override
+  void dispose() {
+    _fullNameController.dispose();
+    _emailController.dispose();
+    _phoneController.dispose();
+    _passwordController.dispose();
+    _confirmPasswordController.dispose();
+    super.dispose();
+  }
+
+  String? _validateFullName(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'Please enter your full name';
+    }
+    return null;
+  }
+
+  String? _validateEmail(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'Please enter your email';
+    } else if (!RegExp(r'^[^@]+@[^@]+\.[^@]+').hasMatch(value)) {
+      return 'Please enter a valid email';
+    }
+    return null;
+  }
+
+  String? _validatePhone(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'Please enter your phone number';
+    } else if (!RegExp(r'^\+?[0-9]{10,}$').hasMatch(value)) {
+      return 'Please enter a valid phone number';
+    }
+    return null;
+  }
+
+  String? _validatePassword(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'Please enter your password';
+    } else if (value.length < 6) {
+      return 'Password must be at least 6 characters';
+    }
+    return null;
+  }
+
+  String? _validateConfirmPassword(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'Please confirm your password';
+    } else if (value != _passwordController.text) {
+      return 'Passwords do not match';
+    }
+    return null;
+  }
+
+  void _submitForm() {
+    if (_formKey.currentState!.validate()) {
+      // Navigate to the email confirmation screen
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => EmailConfirm()),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    return 
-      Container(
-      decoration: const  BoxDecoration(
+    return Container(
+      decoration: const BoxDecoration(
         gradient: LinearGradient(
-        begin: Alignment.topLeft,
-        end: Alignment.bottomRight,
-        colors: [
-          Color.fromARGB(255, 115, 79, 141),
-          Color.fromARGB(255, 150, 94, 187),
-          Color.fromARGB(255, 90, 47, 73)
-          ,Color.fromARGB(255, 151, 130, 164),
-          Color(0xff7F5D72),
-        ]
-        )
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          colors: [
+            Color.fromARGB(255, 115, 79, 141),
+            Color.fromARGB(255, 150, 94, 187),
+            Color.fromARGB(255, 90, 47, 73),
+            Color.fromARGB(255, 151, 130, 164),
+            Color(0xff7F5D72),
+          ],
+        ),
       ),
       child: Scaffold(
         backgroundColor: Colors.transparent,
@@ -26,24 +101,27 @@ class SingupScreen extends StatelessWidget {
           top: true,
           child: Center(
             child: SingleChildScrollView(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  // text welcome
-                  Padding(
-                    padding: EdgeInsets.all(27.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Text(
-                          'Create your account',
-                          style:TextStyle(fontSize: 22,fontWeight: FontWeight.bold,),
-                        ),
-                      ],
+              child: Form(
+                key: _formKey,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.all(27.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Text(
+                            'Create your account',
+                            style: TextStyle(
+                              fontSize: 22,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
-                  //name   vorname
-                  Padding(
+                    Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 25.0),
                       child: Container(
                         decoration: BoxDecoration(
@@ -55,17 +133,19 @@ class SingupScreen extends StatelessWidget {
                         ),
                         child: Padding(
                           padding: const EdgeInsets.only(left: 20.0),
-                          child: TextField(
+                          child: TextFormField(
+                            controller: _fullNameController,
                             decoration: InputDecoration(
                               border: InputBorder.none,
                               hintText: 'Full name',
                             ),
+                            validator: _validateFullName,
                           ),
                         ),
-                      )),
-                  SizedBox(height: 10),
-                  //email
-                  Padding(
+                      ),
+                    ),
+                    SizedBox(height: 10),
+                    Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 25.0),
                       child: Container(
                         decoration: BoxDecoration(
@@ -77,17 +157,19 @@ class SingupScreen extends StatelessWidget {
                         ),
                         child: Padding(
                           padding: const EdgeInsets.only(left: 20.0),
-                          child: TextField(
+                          child: TextFormField(
+                            controller: _emailController,
                             decoration: InputDecoration(
                               border: InputBorder.none,
                               hintText: 'Email',
                             ),
+                            validator: _validateEmail,
                           ),
                         ),
-                      )),
-                  SizedBox(height: 10),
-                  // phone number
-                  Padding(
+                      ),
+                    ),
+                    SizedBox(height: 10),
+                    Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 25.0),
                       child: Container(
                         decoration: BoxDecoration(
@@ -99,17 +181,19 @@ class SingupScreen extends StatelessWidget {
                         ),
                         child: Padding(
                           padding: const EdgeInsets.only(left: 20.0),
-                          child: TextField(
+                          child: TextFormField(
+                            controller: _phoneController,
                             decoration: InputDecoration(
                               border: InputBorder.none,
                               hintText: 'Phone Number',
                             ),
+                            validator: _validatePhone,
                           ),
                         ),
-                      )),
-                  SizedBox(height: 10),
-       // password
-                  Padding(
+                      ),
+                    ),
+                    SizedBox(height: 10),
+                    Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 25.0),
                       child: Container(
                         decoration: BoxDecoration(
@@ -121,17 +205,20 @@ class SingupScreen extends StatelessWidget {
                         ),
                         child: Padding(
                           padding: const EdgeInsets.only(left: 20.0),
-                          child: TextField(
+                          child: TextFormField(
+                            controller: _passwordController,
+                            obscureText: true,
                             decoration: InputDecoration(
                               border: InputBorder.none,
                               hintText: 'Password',
                             ),
+                            validator: _validatePassword,
                           ),
                         ),
-                      )),
-                  SizedBox(height: 10),
-                  //confirm password
-                  Padding(
+                      ),
+                    ),
+                    SizedBox(height: 10),
+                    Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 25.0),
                       child: Container(
                         decoration: BoxDecoration(
@@ -143,90 +230,85 @@ class SingupScreen extends StatelessWidget {
                         ),
                         child: Padding(
                           padding: const EdgeInsets.only(left: 20.0),
-                          child: TextField(
+                          child: TextFormField(
+                            controller: _confirmPasswordController,
+                            obscureText: true,
                             decoration: InputDecoration(
                               border: InputBorder.none,
                               hintText: 'Confirm Password',
                             ),
+                            validator: _validateConfirmPassword,
                           ),
                         ),
-                      )),
-                  SizedBox(height: 20),
-                  // Sign in
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 25.0),
-                    child: InkWell(
-                      onTap: () {
-                        //  Navigator => Email-Confirm
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => EmailConfirm()),
-                              );
-                      },
-                      child: Container(
-                        padding: EdgeInsets.all(20),
-                        decoration: BoxDecoration(
-                          color: Color.fromARGB(172, 7, 6, 7),
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                        child: Center(
-                          child: Text(
-                            'Create Account',
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 17,
+                      ),
+                    ),
+                    SizedBox(height: 20),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                      child: InkWell(
+                        onTap: _submitForm,
+                        child: Container(
+                          padding: EdgeInsets.all(20),
+                          decoration: BoxDecoration(
+                            color: Color.fromARGB(172, 7, 6, 7),
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          child: Center(
+                            child: Text(
+                              'Create Account',
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 17,
+                              ),
                             ),
                           ),
                         ),
                       ),
                     ),
-                  ),
-                  SizedBox(height: 60),
-                  // or with facebook Google
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 25.0),
-                    child: Row(
-                      children: [
-                        Expanded(
-                          child: Divider(
-                            thickness: 0.5,
-                            color: Colors.white54,
+                    SizedBox(height: 60),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: Divider(
+                              thickness: 0.5,
+                              color: Colors.white54,
+                            ),
                           ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                          child: Text(
-                            'Or continue with',
-                            style: TextStyle(color: Colors.white54),
+                          Padding(
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 10.0),
+                            child: Text(
+                              'Or continue with',
+                              style: TextStyle(color: Colors.white54),
+                            ),
                           ),
-                        ),
-                        Expanded(
-                          child: Divider(
-                            thickness: 0.5,
-                            color: Colors.white54,
+                          Expanded(
+                            child: Divider(
+                              thickness: 0.5,
+                              color: Colors.white54,
+                            ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
-                  ),
-                  SizedBox(height: 10),
-                  //Google , Facebook
-                  Padding(
-                    padding: const EdgeInsets.all(30.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        // Google
-                        Image.asset(
-                          'assets/images/image 5.png',
-                          height: 72,
-                        ),
-                        // Facebook
-                        const SizedBox(width: 5),
-                        Image.asset(
-                          'assets/images/image 6.png',
-                          height: 72,
+                    SizedBox(height: 10),
+                    Padding(
+                      padding: const EdgeInsets.all(30.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Image.asset(
+                            'assets/images/image 5.png',
+                            height: 72,
+                          ),
+                          const SizedBox(width: 5),
+                          Image.asset(
+                            'assets/images/image 6.png',
+                            height: 
+ 72,
                         ),
                         const SizedBox(width: 5),
                         Image.asset(
@@ -241,6 +323,7 @@ class SingupScreen extends StatelessWidget {
           ),
         ),
       ),
+    ),
     );
   }
 }
