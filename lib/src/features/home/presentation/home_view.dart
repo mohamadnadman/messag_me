@@ -5,6 +5,7 @@ import 'package:messagme/src/features/history/presentation/history_page.dart';
 import 'package:messagme/src/features/movies/presentation/movie_overview.dart';
 import 'package:messagme/widget/drawe_bar.dart';
 
+
 class HomeView extends StatelessWidget {
   const HomeView({super.key});
 

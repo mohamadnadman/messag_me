@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:messagme/src/data/database_repository.dart';
 import 'package:messagme/src/domain/movie.dart';
 
@@ -77,7 +79,9 @@ class MockDatbase implements DatabaseRepository {
   ];
 
   @override
-  List<Movie> getMovies() {
+ Future< List<Movie>> getMovies()async {
+  int delay = Random().nextInt(3);
+  await Future.delayed(Duration(seconds: delay));
     return movies;
   }
 }
