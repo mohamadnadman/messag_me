@@ -15,7 +15,7 @@ class _MovieOverviewState extends State<MovieOverview> {
   @override
   void initState() {
     super.initState();
-    MockDatbase mockDatabase = MockDatbase();
+    MockDatabase mockDatabase = MockDatabase();
     moviesFuture = mockDatabase.getMovies();
   }
 
