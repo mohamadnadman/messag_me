@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:messagme/src/data/database_repository.dart';
 import 'package:messagme/src/features/authentication/presentation/email_confirm.dart';
 
 class SingupScreen extends StatefulWidget {
-  const SingupScreen({super.key});
+  final DatabaseRepository databaseRepository;
+
+  const SingupScreen(this.databaseRepository, {super.key});
 
   @override
-  _SingupScreenState createState() => _SingupScreenState();
+  State<SingupScreen> createState() => SingupScreenState();
 }
 
-class _SingupScreenState extends State<SingupScreen> {
+class SingupScreenState extends State<SingupScreen> {
   final _formKey = GlobalKey<FormState>();
   final _fullNameController = TextEditingController();
   final _emailController = TextEditingController();
@@ -74,7 +77,8 @@ class _SingupScreenState extends State<SingupScreen> {
       // Navigate to the email confirmation screen
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => EmailConfirm()),
+        MaterialPageRoute(
+            builder: (context) => EmailConfirm(widget.databaseRepository)),
       );
     }
   }
@@ -106,7 +110,7 @@ class _SingupScreenState extends State<SingupScreen> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Padding(
+                    const Padding(
                       padding: EdgeInsets.all(27.0),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.start,
@@ -127,7 +131,7 @@ class _SingupScreenState extends State<SingupScreen> {
                         decoration: BoxDecoration(
                           color: Colors.grey[200],
                           border: Border.all(
-                            color: Color.fromARGB(0, 5, 4, 4),
+                            color: const Color.fromARGB(0, 5, 4, 4),
                           ),
                           borderRadius: BorderRadius.circular(12),
                         ),
@@ -135,7 +139,7 @@ class _SingupScreenState extends State<SingupScreen> {
                           padding: const EdgeInsets.only(left: 20.0),
                           child: TextFormField(
                             controller: _fullNameController,
-                            decoration: InputDecoration(
+                            decoration: const InputDecoration(
                               border: InputBorder.none,
                               hintText: 'Full name',
                             ),
@@ -144,14 +148,14 @@ class _SingupScreenState extends State<SingupScreen> {
                         ),
                       ),
                     ),
-                    SizedBox(height: 10),
+                    const SizedBox(height: 10),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 25.0),
                       child: Container(
                         decoration: BoxDecoration(
                           color: Colors.grey[200],
                           border: Border.all(
-                            color: Color.fromARGB(0, 5, 4, 4),
+                            color: const Color.fromARGB(0, 5, 4, 4),
                           ),
                           borderRadius: BorderRadius.circular(12),
                         ),
@@ -159,7 +163,7 @@ class _SingupScreenState extends State<SingupScreen> {
                           padding: const EdgeInsets.only(left: 20.0),
                           child: TextFormField(
                             controller: _emailController,
-                            decoration: InputDecoration(
+                            decoration: const InputDecoration(
                               border: InputBorder.none,
                               hintText: 'Email',
                             ),
@@ -168,14 +172,14 @@ class _SingupScreenState extends State<SingupScreen> {
                         ),
                       ),
                     ),
-                    SizedBox(height: 10),
+                    const SizedBox(height: 10),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 25.0),
                       child: Container(
                         decoration: BoxDecoration(
                           color: Colors.grey[200],
                           border: Border.all(
-                            color: Color.fromARGB(0, 5, 4, 4),
+                            color: const Color.fromARGB(0, 5, 4, 4),
                           ),
                           borderRadius: BorderRadius.circular(12),
                         ),
@@ -183,7 +187,7 @@ class _SingupScreenState extends State<SingupScreen> {
                           padding: const EdgeInsets.only(left: 20.0),
                           child: TextFormField(
                             controller: _phoneController,
-                            decoration: InputDecoration(
+                            decoration: const InputDecoration(
                               border: InputBorder.none,
                               hintText: 'Phone Number',
                             ),
@@ -192,14 +196,14 @@ class _SingupScreenState extends State<SingupScreen> {
                         ),
                       ),
                     ),
-                    SizedBox(height: 10),
+                    const SizedBox(height: 10),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 25.0),
                       child: Container(
                         decoration: BoxDecoration(
                           color: Colors.grey[200],
                           border: Border.all(
-                            color: Color.fromARGB(0, 5, 4, 4),
+                            color: const Color.fromARGB(0, 5, 4, 4),
                           ),
                           borderRadius: BorderRadius.circular(12),
                         ),
@@ -208,7 +212,7 @@ class _SingupScreenState extends State<SingupScreen> {
                           child: TextFormField(
                             controller: _passwordController,
                             obscureText: true,
-                            decoration: InputDecoration(
+                            decoration: const InputDecoration(
                               border: InputBorder.none,
                               hintText: 'Password',
                             ),
@@ -217,14 +221,14 @@ class _SingupScreenState extends State<SingupScreen> {
                         ),
                       ),
                     ),
-                    SizedBox(height: 10),
+                    const SizedBox(height: 10),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 25.0),
                       child: Container(
                         decoration: BoxDecoration(
                           color: Colors.grey[200],
                           border: Border.all(
-                            color: Color.fromARGB(0, 5, 4, 4),
+                            color: const Color.fromARGB(0, 5, 4, 4),
                           ),
                           borderRadius: BorderRadius.circular(12),
                         ),
@@ -233,7 +237,7 @@ class _SingupScreenState extends State<SingupScreen> {
                           child: TextFormField(
                             controller: _confirmPasswordController,
                             obscureText: true,
-                            decoration: InputDecoration(
+                            decoration: const InputDecoration(
                               border: InputBorder.none,
                               hintText: 'Confirm Password',
                             ),
@@ -242,18 +246,18 @@ class _SingupScreenState extends State<SingupScreen> {
                         ),
                       ),
                     ),
-                    SizedBox(height: 20),
+                    const SizedBox(height: 20),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 25.0),
                       child: InkWell(
                         onTap: _submitForm,
                         child: Container(
-                          padding: EdgeInsets.all(20),
+                          padding: const EdgeInsets.all(20),
                           decoration: BoxDecoration(
-                            color: Color.fromARGB(172, 7, 6, 7),
+                            color: const Color.fromARGB(172, 7, 6, 7),
                             borderRadius: BorderRadius.circular(12),
                           ),
-                          child: Center(
+                          child: const Center(
                             child: Text(
                               'Create Account',
                               style: TextStyle(
@@ -266,9 +270,9 @@ class _SingupScreenState extends State<SingupScreen> {
                         ),
                       ),
                     ),
-                    SizedBox(height: 60),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                    const SizedBox(height: 60),
+                    const Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 25.0),
                       child: Row(
                         children: [
                           Expanded(
@@ -278,8 +282,7 @@ class _SingupScreenState extends State<SingupScreen> {
                             ),
                           ),
                           Padding(
-                            padding:
-                                const EdgeInsets.symmetric(horizontal: 10.0),
+                            padding: EdgeInsets.symmetric(horizontal: 10.0),
                             child: Text(
                               'Or continue with',
                               style: TextStyle(color: Colors.white54),
@@ -294,7 +297,7 @@ class _SingupScreenState extends State<SingupScreen> {
                         ],
                       ),
                     ),
-                    SizedBox(height: 10),
+                    const SizedBox(height: 10),
                     Padding(
                       padding: const EdgeInsets.all(30.0),
                       child: Row(
@@ -307,29 +310,23 @@ class _SingupScreenState extends State<SingupScreen> {
                           const SizedBox(width: 5),
                           Image.asset(
                             'assets/images/image 6.png',
-                            height: 
- 72,
-                        ),
-                        const SizedBox(width: 5),
-                        Image.asset(
-                          'assets/images/image 7.png',
-                          height: 72,),
-                      ],
-                    ),
-                  )
-                ],
+                            height: 72,
+                          ),
+                          const SizedBox(width: 5),
+                          Image.asset(
+                            'assets/images/image 7.png',
+                            height: 72,
+                          ),
+                        ],
+                      ),
+                    )
+                  ],
+                ),
               ),
             ),
           ),
         ),
       ),
-    ),
     );
   }
 }
-
-
-
-
-
-

@@ -1,24 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:messagme/src/data/mock_database.dart';
+import 'package:messagme/src/data/database_repository.dart';
 import 'package:messagme/src/domain/movie.dart';
 
 class MovieOverview extends StatefulWidget {
-  const MovieOverview({super.key});
+  final DatabaseRepository databaseRepository;
+
+  const MovieOverview(this.databaseRepository, {super.key});
 
   @override
   State<MovieOverview> createState() => _MovieOverviewState();
 }
 
 class _MovieOverviewState extends State<MovieOverview> {
-  late Future<List<Movie>> moviesFuture;
-
-  @override
-  void initState() {
-    super.initState();
-    MockDatabase mockDatabase = MockDatabase();
-    moviesFuture = mockDatabase.getMovies();
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,7 +28,7 @@ class _MovieOverviewState extends State<MovieOverview> {
         ),
       ),
       body: FutureBuilder<List<Movie>>(
-        future: moviesFuture,
+        future: widget.databaseRepository.getMovies(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             // Loading state

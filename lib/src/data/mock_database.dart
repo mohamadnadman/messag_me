@@ -3,7 +3,7 @@ import 'dart:async';
 
 import 'package:messagme/src/data/database_repository.dart';
 import 'package:messagme/src/domain/movie.dart';
-import 'package:messagme/src/features/authentication/fotos/images_class.dart';
+import 'package:messagme/src/domain/images.dart';
 
 class MockDatabase implements DatabaseRepository {
   // Movies mocken

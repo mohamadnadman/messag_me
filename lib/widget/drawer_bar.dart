@@ -1,15 +1,19 @@
-
 import 'package:flutter/material.dart';
+import 'package:messagme/src/data/database_repository.dart';
 import 'package:messagme/src/features/authentication/presentation/login_screen.dart';
 import 'package:messagme/widget/myprofile.dart';
-class Drawe_bar extends StatelessWidget {
-  const Drawe_bar({
+
+class DrawerBar extends StatelessWidget {
+  final DatabaseRepository databaseRepository;
+
+  const DrawerBar(
+    this.databaseRepository, {
     super.key,
   });
   @override
   Widget build(BuildContext context) {
     return Drawer(
-      backgroundColor: Color.fromARGB(172, 11, 4, 20),
+      backgroundColor: const Color.fromARGB(172, 11, 4, 20),
       child: ListView(
         // Important: Remove any padding from the ListView.
         padding: EdgeInsets.zero,
@@ -21,19 +25,19 @@ class Drawe_bar extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Image(height: 20,
+                Image(
+                  height: 20,
                   image: AssetImage('assets/images/logo2.png'),
                 ),
                 SizedBox(height: 10),
                 Text('unknown'),
                 Text('unknown@hotmail.com'),
-                
               ],
             ),
           ),
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
           ListTile(
-            leading: Icon(Icons.home),
+            leading: const Icon(Icons.home),
             iconColor: Colors.white,
             title: const Text(
               'My Profile',
@@ -41,15 +45,17 @@ class Drawe_bar extends StatelessWidget {
             ),
             textColor: Colors.white,
             onTap: () {
-               Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => MyProfile(),),);
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const MyProfile(),
+                ),
+              );
             },
           ),
-          SizedBox(height: 10),
+          const SizedBox(height: 10),
           ListTile(
-            leading: Icon(Icons.group),
+            leading: const Icon(Icons.group),
             iconColor: Colors.white,
             title: const Text(
               'Groub',
@@ -60,10 +66,9 @@ class Drawe_bar extends StatelessWidget {
               Navigator.pop(context);
             },
           ),
-          SizedBox(height: 10),
-          
-           ListTile(
-            leading: Icon(Icons.favorite),
+          const SizedBox(height: 10),
+          ListTile(
+            leading: const Icon(Icons.favorite),
             iconColor: Colors.white,
             title: const Text(
               'Favorit Barbies',
@@ -74,9 +79,9 @@ class Drawe_bar extends StatelessWidget {
               Navigator.pop(context);
             },
           ),
-          SizedBox(height: 10),
+          const SizedBox(height: 10),
           ListTile(
-            leading: Icon(Icons.contact_emergency),
+            leading: const Icon(Icons.contact_emergency),
             iconColor: Colors.white,
             title: const Text(
               'Contact ',
@@ -87,9 +92,9 @@ class Drawe_bar extends StatelessWidget {
               Navigator.pop(context);
             },
           ),
-          SizedBox(height: 10),
+          const SizedBox(height: 10),
           ListTile(
-            leading: Icon(Icons.settings),
+            leading: const Icon(Icons.settings),
             iconColor: Colors.white,
             title: const Text(
               'Settings',
@@ -100,9 +105,9 @@ class Drawe_bar extends StatelessWidget {
               Navigator.pop(context);
             },
           ),
-          SizedBox(height: 10),
+          const SizedBox(height: 10),
           ListTile(
-            leading: Icon(Icons.exit_to_app),
+            leading: const Icon(Icons.exit_to_app),
             iconColor: Colors.white,
             title: const Text(
               'Exit',
@@ -113,7 +118,7 @@ class Drawe_bar extends StatelessWidget {
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => LoginScreen(),
+                    builder: (context) => LoginScreen(databaseRepository),
                   ));
             },
           ),

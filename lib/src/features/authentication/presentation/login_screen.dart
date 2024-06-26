@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:messagme/src/data/database_repository.dart';
 import 'package:messagme/src/features/authentication/presentation/singup.dart';
 import 'package:messagme/src/features/home/presentation/home_view.dart';
 
 class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
+  final DatabaseRepository databaseRepository;
+  const LoginScreen(this.databaseRepository, {super.key});
 
   @override
-  _LoginScreenState createState() => _LoginScreenState();
+  State<LoginScreen> createState() => _LoginScreenState();
 }
 
 class _LoginScreenState extends State<LoginScreen> {
@@ -44,7 +46,8 @@ class _LoginScreenState extends State<LoginScreen> {
       // Perform login action
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => HomeView()),
+        MaterialPageRoute(
+            builder: (context) => HomeView(widget.databaseRepository)),
       );
     }
   }
@@ -75,24 +78,24 @@ class _LoginScreenState extends State<LoginScreen> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Container(
+                    SizedBox(
                       width: 150,
                       height: 150,
                       child: Center(
                         child: Image.asset('assets/images/logo2.png'),
                       ),
                     ),
-                    SizedBox(height: 30),
-                    Text(
+                    const SizedBox(height: 30),
+                    const Text(
                       'Welcome to Our Community!',
                       style: TextStyle(color: Colors.white, fontSize: 20),
                     ),
-                    SizedBox(height: 10),
-                    Text(
+                    const SizedBox(height: 10),
+                    const Text(
                       '',
                       style: TextStyle(fontSize: 15, color: Colors.white54),
                     ),
-                    SizedBox(height: 20),
+                    const SizedBox(height: 20),
                     // Email TextField
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 25.0),
@@ -100,7 +103,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         decoration: BoxDecoration(
                           color: Colors.grey[200],
                           border: Border.all(
-                            color: Color.fromARGB(0, 5, 4, 4),
+                            color: const Color.fromARGB(0, 5, 4, 4),
                           ),
                           borderRadius: BorderRadius.circular(12),
                         ),
@@ -108,7 +111,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           padding: const EdgeInsets.only(left: 20.0),
                           child: TextFormField(
                             controller: _emailController,
-                            decoration: InputDecoration(
+                            decoration: const InputDecoration(
                               border: InputBorder.none,
                               hintText: 'Email',
                             ),
@@ -118,14 +121,14 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                     ),
                     // Password TextField
-                    SizedBox(height: 10),
+                    const SizedBox(height: 10),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 25.0),
                       child: Container(
                         decoration: BoxDecoration(
                           color: Colors.grey[200],
                           border: Border.all(
-                            color: Color.fromARGB(0, 5, 4, 4),
+                            color: const Color.fromARGB(0, 5, 4, 4),
                           ),
                           borderRadius: BorderRadius.circular(12),
                         ),
@@ -134,7 +137,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           child: TextFormField(
                             controller: _passwordController,
                             obscureText: true,
-                            decoration: InputDecoration(
+                            decoration: const InputDecoration(
                               border: InputBorder.none,
                               hintText: 'Password',
                             ),
@@ -156,19 +159,19 @@ class _LoginScreenState extends State<LoginScreen> {
                         ],
                       ),
                     ),
-                    SizedBox(height: 10),
+                    const SizedBox(height: 10),
                     // Sign in Button
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 25.0),
                       child: InkWell(
                         onTap: _submitForm,
                         child: Container(
-                          padding: EdgeInsets.all(20),
+                          padding: const EdgeInsets.all(20),
                           decoration: BoxDecoration(
-                            color: Color.fromARGB(172, 15, 6, 25),
+                            color: const Color.fromARGB(172, 15, 6, 25),
                             borderRadius: BorderRadius.circular(12),
                           ),
-                          child: Center(
+                          child: const Center(
                             child: Text(
                               'Sign in',
                               style: TextStyle(
@@ -188,7 +191,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
                           TextButton(
-                            child: Text(
+                            child: const Text(
                               'Register now',
                               style: TextStyle(color: Colors.white54),
                             ),
@@ -196,17 +199,18 @@ class _LoginScreenState extends State<LoginScreen> {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => SingupScreen()),
+                                    builder: (context) => SingupScreen(
+                                        widget.databaseRepository)),
                               );
                             },
                           ),
                         ],
                       ),
                     ),
-                    SizedBox(height: 10),
+                    const SizedBox(height: 10),
                     // Or continue with
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                    const Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 25.0),
                       child: Row(
                         children: [
                           Expanded(
@@ -216,21 +220,20 @@ class _LoginScreenState extends State<LoginScreen> {
                             ),
                           ),
                           Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                            padding: EdgeInsets.symmetric(horizontal: 10.0),
                             child: Text(
                               'Or continue with',
                               style: TextStyle(color: Colors.white54),
                             ),
                           ),
                           Expanded(
-                            child: Divider(
-                              thickness: 0.5,
-                              color: Colors.white54),
+                            child:
+                                Divider(thickness: 0.5, color: Colors.white54),
                           ),
                         ],
                       ),
                     ),
-                    SizedBox(height: 2),
+                    const SizedBox(height: 2),
                     // Google, Facebook, Apple
                     Padding(
                       padding: const EdgeInsets.all(30.0),
@@ -266,13 +269,3 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 }
-
-
-
-
-
-
-
-
-
-

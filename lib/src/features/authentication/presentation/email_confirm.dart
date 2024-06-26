@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:messagme/src/data/database_repository.dart';
 import 'package:messagme/src/features/authentication/presentation/succesemail_screen.dart';
 
 class EmailConfirm extends StatefulWidget {
-  const EmailConfirm({super.key});
+  final DatabaseRepository databaseRepository;
+
+  const EmailConfirm(this.databaseRepository, {super.key});
 
   @override
-  _EmailConfirmState createState() => _EmailConfirmState();
+  EmailConfirmState createState() => EmailConfirmState();
 }
 
-class _EmailConfirmState extends State<EmailConfirm> {
+class EmailConfirmState extends State<EmailConfirm> {
   final _formKey = GlobalKey<FormState>();
   final _emailController = TextEditingController();
 
@@ -32,7 +35,8 @@ class _EmailConfirmState extends State<EmailConfirm> {
       // Navigate to the success screen
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => SuccEmailScreen()),
+        MaterialPageRoute(
+            builder: (context) => SuccEmailScreen(widget.databaseRepository)),
       );
     }
   }
@@ -64,24 +68,24 @@ class _EmailConfirmState extends State<EmailConfirm> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   // logo
                   children: [
-                    Container(
+                    const SizedBox(
                       width: 100,
                       height: 200,
-                      child: const Center(
+                      child: Center(
                         child: Image(
                           image: AssetImage('assets/images/logo2.png'),
                         ),
                       ),
                     ),
-                    SizedBox(height: 70),
+                    const SizedBox(height: 70),
                     // Text "Confirm your Email"
-                    Text(
+                    const Text(
                       'Confirm your Email',
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    SizedBox(height: 10),
+                    const SizedBox(height: 10),
                     // Email TextFormField
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 25.0),
@@ -97,7 +101,7 @@ class _EmailConfirmState extends State<EmailConfirm> {
                           padding: const EdgeInsets.only(left: 20.0),
                           child: TextFormField(
                             controller: _emailController,
-                            decoration: InputDecoration(
+                            decoration: const InputDecoration(
                               border: InputBorder.none,
                               hintText: 'Email',
                             ),
@@ -106,9 +110,9 @@ class _EmailConfirmState extends State<EmailConfirm> {
                         ),
                       ),
                     ),
-                    SizedBox(height: 10),
+                    const SizedBox(height: 10),
                     // Text "Confirm Your Email to be One of Our Family"
-                    Center(
+                    const Center(
                       child: Text(
                         'Confirm Your Email to be One of Our Family.',
                         textAlign: TextAlign.center,
@@ -118,19 +122,19 @@ class _EmailConfirmState extends State<EmailConfirm> {
                         ),
                       ),
                     ),
-                    SizedBox(height: 30),
+                    const SizedBox(height: 30),
                     // Button "Continue"
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 25.0),
                       child: InkWell(
                         onTap: _submitForm,
                         child: Container(
-                          padding: EdgeInsets.all(20),
+                          padding: const EdgeInsets.all(20),
                           decoration: BoxDecoration(
-                            color: Color.fromARGB(172, 11, 4, 20),
+                            color: const Color.fromARGB(172, 11, 4, 20),
                             borderRadius: BorderRadius.circular(12),
                           ),
-                          child: Center(
+                          child: const Center(
                             child: Text(
                               'Continue',
                               style: TextStyle(
@@ -143,7 +147,7 @@ class _EmailConfirmState extends State<EmailConfirm> {
                         ),
                       ),
                     ),
-                    SizedBox(height: 90),
+                    const SizedBox(height: 90),
                   ],
                 ),
               ),
